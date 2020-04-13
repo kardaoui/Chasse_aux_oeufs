@@ -12,8 +12,8 @@ class Panier(pygame.sprite.Sprite):
         self.rect.y = 300
         self.vitesse = 5
 
-        self.event_key_droite = 275
-        self.event_key_gauche = 276
+        self.event_key_droite = pygame.K_RIGHT
+        self.event_key_gauche = pygame.K_LEFT
 
     def deplacement(self, direction):
         if direction == self.event_key_droite:
