@@ -7,3 +7,4 @@ class Jeu():
         self.panier = Panier()
         self.oeuf = Oeuf()
         self.touches_actives = {}
+
