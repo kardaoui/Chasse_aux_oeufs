@@ -6,6 +6,7 @@ class Oeuf(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
+
         self.image = pygame.image.load("assets/oeuf.png")
         self.image = pygame.transform.scale(self.image, (70, 70))
         self.rect = self.image.get_rect()
@@ -17,7 +18,4 @@ class Oeuf(pygame.sprite.Sprite):
         self.temps = 200
 
         self.mes_oeufs = pygame.sprite.Group()
-
-    def chute(self):
-        self.rect.y += self.vitesse
 
