@@ -13,9 +13,10 @@ class Oeuf(pygame.sprite.Sprite):
         self.rect.x = random.randint(70, 730)
         self.rect.y = 0
 
-        self.vitesse = random.randint(2,5)
+        #self.vitesse = random.randint(1,2)
+        self.vitesse = 2
 
-        self.temps = 200
+        self.group_oeufs = pygame.sprite.Group()
 
-        self.mes_oeufs = pygame.sprite.Group()
-
+    def chute(self):
+        self.rect.y += self.vitesse

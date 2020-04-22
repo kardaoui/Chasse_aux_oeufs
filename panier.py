@@ -18,16 +18,10 @@ class Panier(pygame.sprite.Sprite):
 
         self.groupe_panier = pygame.sprite.Group()
 
-
     def deplacement(self, direction):
         if direction == self.event_key_droite:
             self.rect.x += self.vitesse
         if direction == self.event_key_gauche:
             self.rect.x -= self.vitesse
-
-    def ajouter_groupe_panier(self):
-        #new_panier = Panier()
-        self.groupe_panier.add(self)
-
 
 

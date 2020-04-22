@@ -4,6 +4,7 @@ class Fenetre:
 
     def __init__(self):
         pygame.init()
+        self.pyGame = pygame
         self.hauteur_fenetre = 480
         self.largeur_fenetre = 800
         self.fenetre = pygame.display.set_mode((self.largeur_fenetre, self.hauteur_fenetre))
@@ -13,18 +14,15 @@ class Fenetre:
         self.sol = pygame.image.load("assets/sol.png").convert_alpha()
         self.fond = pygame.image.load("assets/fond.jpg")
 
+    def affichage_arriere_plan(self):
         self.fenetre.blit(self.fond, (0, 0))
         self.fenetre.blit(self.sol, (0, 0))
 
-        pygame.display.flip()
-
-    def affichage(self):
-        self.fenetre.blit(self.fond, (0, 0))
-        self.fenetre.blit(self.sol, (0, 0))
+    def dessiner_groupe(self, group):
+        group.draw(self.fenetre)
 
 
-    def afficher_element(self, image, taille):
-        self.fenetre.blit(image,taille)
+    def rafraichir_fenetre(self):
         pygame.display.flip()
 
 if __name__ == '__main__':
