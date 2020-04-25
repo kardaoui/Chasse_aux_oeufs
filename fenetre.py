@@ -14,13 +14,14 @@ class Fenetre:
         self.sol = pygame.image.load("assets/sol.png").convert_alpha()
         self.fond = pygame.image.load("assets/fond.jpg")
 
-    def affichage_arriere_plan(self):
+    def affichage_fond(self):
         self.fenetre.blit(self.fond, (0, 0))
+
+    def affichage_sol(self):
         self.fenetre.blit(self.sol, (0, 0))
 
     def dessiner_groupe(self, group):
         group.draw(self.fenetre)
-
 
     def rafraichir_fenetre(self):
         pygame.display.flip()
