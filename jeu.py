@@ -15,13 +15,16 @@ class Jeu:
         self.fenetre = Fenetre()
         self.panier = Panier()
         self.oeuf = Oeuf()
-
         self.rejouer = True
         self.compteur = 0
 
         self.touches_actives = {}
         self.timer = pygame.time.Clock()
         self.group_oeufs = pygame.sprite.Group()
+
+    def verifier_collision(self, oeuf, panier):
+        if pygame.sprite.spritecollide(oeuf, panier, True):
+            print(self.oeuf.groupe_oeuf)
 
     def jouer(self):
         while self.rejouer:
@@ -32,7 +35,6 @@ class Jeu:
                 self.compteur = 80
                 self.oeuf.groupe_oeuf.add(Oeuf())
 
-                
             self.oeuf.chute(self.oeuf.groupe_oeuf)
 
             self.fenetre.dessiner_groupe(self.oeuf.groupe_oeuf)
@@ -42,6 +44,8 @@ class Jeu:
             self.fenetre.dessiner_groupe(self.panier.groupe_panier)
 
             self.fenetre.rafraichir_fenetre()
+
+            self.verifier_collision(self.panier, self.oeuf.groupe_oeuf)
 
             if self.touches_actives.get(pygame.K_RIGHT) and \
                     self.panier.rect.x + self.panier.rect.width < self.fenetre.largeur_fenetre:

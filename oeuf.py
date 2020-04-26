@@ -17,7 +17,6 @@ class Oeuf(pygame.sprite.Sprite):
 
         self.groupe_oeuf = pygame.sprite.Group()
 
-
     def chute(self,group):
         for oeuf_ in group:
             if oeuf_.rect.y < 410:
