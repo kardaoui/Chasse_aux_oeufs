@@ -5,16 +5,13 @@ from panier import Panier
 from oeuf import Oeuf
 
 
-def ajouter_a_groupe(element, group):
-    group.add(element)
-
-
 class Jeu:
 
     def __init__(self):
-        self.fenetre = Fenetre()
+
         self.panier = Panier()
-        self.oeuf = Oeuf()
+        self.fenetre = Fenetre(self.panier)
+        self.oeuf = Oeuf(self.panier)
         self.rejouer = True
         self.compteur = 0
 
@@ -23,29 +20,32 @@ class Jeu:
         self.group_oeufs = pygame.sprite.Group()
 
     def verifier_collision(self, oeuf, panier):
-        if pygame.sprite.spritecollide(oeuf, panier, True):
-            print(self.oeuf.groupe_oeuf)
+        if pygame.sprite.spritecollide(oeuf, panier, True) and oeuf:
+            self.panier.vie += 2
+            print(self.panier.vie)
 
     def jouer(self):
         while self.rejouer:
 
-            self.fenetre.affichage_fond()
+            self.fenetre.affichage(self.fenetre.fond)
 
             if self.compteur == 0:
                 self.compteur = 80
-                self.oeuf.groupe_oeuf.add(Oeuf())
+                self.oeuf.groupe_oeuf.add(Oeuf(self.panier))
 
             self.oeuf.chute(self.oeuf.groupe_oeuf)
 
             self.fenetre.dessiner_groupe(self.oeuf.groupe_oeuf)
 
-            self.fenetre.affichage_sol()
+            self.fenetre.affichage(self.fenetre.sol)
 
             self.fenetre.dessiner_groupe(self.panier.groupe_panier)
 
-            self.fenetre.rafraichir_fenetre()
-
             self.verifier_collision(self.panier, self.oeuf.groupe_oeuf)
+
+            self.fenetre.affichage(self.fenetre.score)
+
+            self.fenetre.rafraichir_fenetre()
 
             if self.touches_actives.get(pygame.K_RIGHT) and \
                     self.panier.rect.x + self.panier.rect.width < self.fenetre.largeur_fenetre:

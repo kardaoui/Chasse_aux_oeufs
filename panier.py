@@ -6,6 +6,8 @@ class Panier(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
+        self.vie = 50
+        self.vie_max = 100
         self.image = pygame.image.load("assets/panier.png")
         self.image = pygame.transform.scale(self.image, (120, 120))
         self.rect = self.image.get_rect()
