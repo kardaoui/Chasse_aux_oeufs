@@ -10,7 +10,7 @@ class Jeu:
     def __init__(self):
 
         self.panier = Panier()
-        self.fenetre = Fenetre(self.panier)
+        self.fenetre = Fenetre()
         self.oeuf = Oeuf(self.panier)
         self.rejouer = True
         self.compteur = 0
@@ -19,21 +19,14 @@ class Jeu:
         self.timer = pygame.time.Clock()
         self.group_oeufs = pygame.sprite.Group()
 
-    def verifier_collision(self, oeuf, panier):
-        if pygame.sprite.spritecollide(oeuf, panier, True) and oeuf:
-            self.panier.vie += 2
-            print(self.panier.vie)
-
     def jouer(self):
         while self.rejouer:
-
             self.fenetre.affichage(self.fenetre.fond)
-
             if self.compteur == 0:
                 self.compteur = 80
                 self.oeuf.groupe_oeuf.add(Oeuf(self.panier))
 
-            self.oeuf.chute(self.oeuf.groupe_oeuf)
+            self.oeuf.chute(self.oeuf.groupe_oeuf, self.panier)
 
             self.fenetre.dessiner_groupe(self.oeuf.groupe_oeuf)
 
@@ -41,7 +34,7 @@ class Jeu:
 
             self.fenetre.dessiner_groupe(self.panier.groupe_panier)
 
-            self.verifier_collision(self.panier, self.oeuf.groupe_oeuf)
+            self.fenetre.afficher_score(self.panier.vie)
 
             self.fenetre.affichage(self.fenetre.score)
 

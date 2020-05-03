@@ -17,11 +17,17 @@ class Oeuf(pygame.sprite.Sprite):
 
         self.groupe_oeuf = pygame.sprite.Group()
 
-    def chute(self, group):
+    def chute(self, group , panier):
         for oeuf_ in group:
             if oeuf_.rect.y < 410:
                 oeuf_.rect.y += oeuf_.vitesse
+
+                if pygame.sprite.spritecollide(oeuf_, panier.groupe_panier, False) \
+                        and oeuf_.rect.top > 350 \
+                        and self.panier.rect.left <= oeuf_.rect.centerx <= self.panier.rect.right:
+                    self.panier.vie += 2
+                    group.remove(oeuf_)
             else:
                 group.remove(oeuf_)
                 self.panier.vie -= 2
-                print(self.panier.vie)
+
